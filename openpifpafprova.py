@@ -17,6 +17,6 @@ def calculate_skeleton(image_path, output_dir):
     command = f'srun python -m openpifpaf.predict {image_path} --checkpoint={checkpoint} --json-output {json_output}'
     subprocess.run(command.split())
 
-actual_img_path = '/work/vita/datasets/Aff-Wild2/cropped_aligned/430/00262.jpg'
+actual_image_path = '/work/vita/datasets/Aff-Wild2/cropped_aligned/430/00262.jpg'
 skeleton_output_dir = '/home/trentini/face-skeleton-detection'
 calculate_skeleton(actual_image_path, skeleton_output_dir)

@@ -20,14 +20,18 @@ def calculate_skeleton(image_path, output_dir):
     # Generate the JSON output file path
     json_output = os.path.join(output_dir, os.path.splitext(os.path.basename(image_path))[0] + '.json')
 
-    pifpaf = openpifpaf.PifPaf(checkpoint=checkpoint)
+    # Load image
+    img = openpifpaf.datasets.PilImage.open(image_path)
 
-    # Load the input image
-    image = PIL.Image.open(image_path)
+    # Create predictor object
+    predictor = openpifpaf.Predictor(checkpoint=checkpoint)
 
-    # Generate JSON output for the image
-    predictions, _ = pifpaf.process_image(image)
-    openpifpaf.io.CocoWriter().write(json_output, image_path, predictions, {}, {})
+    # Run prediction on image
+    predictions, _ = predictor(img)
+
+    # Convert predictions to JSON and save to file
+    with open(json_output, 'w') as f:
+        json.dump(predictions, f)
 
 actual_image_path = '/work/vita/datasets/Aff-Wild2/cropped_aligned/430/00262.jpg'
 skeleton_output_dir = '/home/trentini/face-skeleton-detection'

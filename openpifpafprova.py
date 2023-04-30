@@ -14,7 +14,7 @@ print("entra")
 
 def calculate_skeleton(image_path, output_dir):
     checkpoint = 'shufflenetv2k30-wholebody'
-    model, _ = openpifpaf.network.factory(checkpoint)
+    model = openpifpaf.network.shufflenetv2k30().load(checkpoint)
 
     # Create the output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)

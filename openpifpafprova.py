@@ -33,7 +33,7 @@ def out_name(arg, in_name, default_extension):
         ) + default_extension
 
     return arg
-    
+
 def calculate_skeleton(image_path, output_dir):
     checkpoint = 'shufflenetv2k30-wholebody'
 
@@ -54,7 +54,7 @@ def calculate_skeleton(image_path, output_dir):
     # Run prediction on image
     pred = predictor.images([image_path])
     # json output
-    json_out_name = out_name(json_output, meta['file_name'], '.predictions.json')
+    json_out_name = os.path.join(output_dir, os.path.splitext(os.path.basename(image_path))[0] + '.predictions.json')
     with open(json_out_name, 'w') as f:
         json.dump([ann.json_data() for ann in pred], f)
 

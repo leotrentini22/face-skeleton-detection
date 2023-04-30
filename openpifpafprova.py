@@ -7,7 +7,7 @@ import json
 from dataset import * 
 from utils import *
 
-import subprocess
+import imageio
 
 print("entra qui")
 
@@ -20,8 +20,14 @@ def calculate_skeleton(image_path, output_dir):
     # Generate the JSON output file path
     json_output = os.path.join(output_dir, os.path.splitext(os.path.basename(image_path))[0] + '.json')
 
-    # Call the predict_image() function with the appropriate arguments
-    openpifpaf.predict.predict_image(image_path, checkpoint=checkpoint, image_output=False, json_output=json_output)
+    pifpaf = openpifpaf.PifPaf(checkpoint=checkpoint)
+
+    # Load the input image
+    image = PIL.Image.open(image_path)
+
+    # Generate JSON output for the image
+    predictions, _ = pifpaf.process_image(image)
+    openpifpaf.io.CocoWriter().write(json_output, image_path, predictions, {}, {})
 
 actual_image_path = '/work/vita/datasets/Aff-Wild2/cropped_aligned/430/00262.jpg'
 skeleton_output_dir = '/home/trentini/face-skeleton-detection'

@@ -9,13 +9,8 @@ from utils import *
 
 import subprocess
 
-image_paths = ['/work/vita/datasets/Aff-Wild2/cropped_aligned/430/00261.jpg', 
-               '/work/vita/datasets/Aff-Wild2/cropped_aligned/430/00262.jpg',
-               '/work/vita/datasets/Aff-Wild2/cropped_aligned/430/00263.jpg']
-checkpoint = 'shufflenetv2k30-wholebody'
-output_dir = '/home/trentini/'
-
-for image_path in image_paths:
+def calculate_skeleton(image_path, output_dir):
+    checkpoint = 'shufflenetv2k30-wholebody'
     json_output = output_dir + image_path.split('/')[-1].split('.')[0] + '.json'
     command = f'srun python -m openpifpaf.predict {image_path} --checkpoint={checkpoint} --json-output {json_output}'
     subprocess.run(command.split())

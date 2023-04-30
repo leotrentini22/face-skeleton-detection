@@ -7,6 +7,6 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --partition=debug
 
-srun python openpifpaf_.py
+srun python print("hello world")
 
 deactivate

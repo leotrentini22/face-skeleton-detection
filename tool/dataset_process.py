@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
+from open_pifpaf_utils import *
 
 #AUs = ['1', '2' ,'4', '5', '6', '7', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '22' ,'23', '24', '25', '26', '27', '32', '38', '39']
 #mcro_AUs = ['L1', 'R1', 'L2', 'R2', 'L4', 'R4', 'L6', 'R6', 'L10', 'R10', 'L12', 'R12', 'L14', 'R14']
@@ -36,6 +37,7 @@ new_dataset_test_label_list = []
 
 list_path_prefix = '/home/trentini/face-skeleton-detection/data/AffWild2/list/' #'/work/vita/datasets/Aff-Wild2/Third_ABAW_Annotations/AU_Detection_Challenge/' #'Datasets/hybrid_dataset/AffWild2/list'
 img_path_vita = '/work/vita/datasets/Aff-Wild2/cropped_aligned/'
+skeleton_path = '/home/trentini/face-skeleton-detection/data/AffWild2/skeletons/'
 
 #data/AffWild2/list
 #/work/vita/datasets/Aff-Wild2/Third_ABAW_Annotations/AU_Detection_Challenge/
@@ -92,7 +94,10 @@ for train_txt in train_list:  #scorre le cartelle in train list
         if -1 in line:  #se c'e' -1, skippa linea
             continue
         au_labels.append(line.reshape(1, -1)) #appende la linea rishapata
-        au_img_path.append(os.path.join(os.path.join(img_path_vita,os.path.basename(os.path.normpath(train_txt.split('.')[0]))), str(j+1).zfill(5)+'.jpg'))  #appende il path dell'immagine, "split" splitta il path dove ci sono i punti e poi prende solo cio che viene prima del punto (quindi toglie ".txt")
+        actual_img_path = os.path.join(os.path.join(img_path_vita,os.path.basename(os.path.normpath(train_txt.split('.')[0]))), str(j+1).zfill(5)+'.jpg')
+        au_img_path.append(actual_img_path)  #appende il path dell'immagine, "split" splitta il path dove ci sono i punti e poi prende solo cio che viene prima del punto (quindi toglie ".txt")
+        skeleton_output_dir = os.path.join(skeleton_path,Train_Set)
+        calculate_skeleton(actual_image_path, skeleton_output_dir)
 
 
 au_labels = np.concatenate(au_labels, axis=0)
@@ -127,7 +132,10 @@ for val_txt in val_list:
         if -1 in line:
             continue
         au_labels.append(line.reshape(1, -1))
-        au_img_path.append(os.path.join(os.path.join(img_path_vita,os.path.basename(os.path.normpath(val_txt.split('.')[0]))), str(j+1).zfill(5)+'.jpg'))
+        actual_img_path = os.path.join(os.path.join(img_path_vita,os.path.basename(os.path.normpath(val_txt.split('.')[0]))), str(j+1).zfill(5)+'.jpg')
+        au_img_path.append(actual_img_path)  #appende il path dell'immagine, "split" splitta il path dove ci sono i punti e poi prende solo cio che viene prima del punto (quindi toglie ".txt")
+        skeleton_output_dir = os.path.join(skeleton_path,Val_Set)
+        calculate_skeleton(actual_image_path, skeleton_output_dir)
 
 
 au_labels = np.concatenate(au_labels, axis=0)
@@ -163,7 +171,10 @@ for test_txt in test_list:   # test list = directories in /work/vita/datasets/Af
         if -1 in line:
             continue
         au_labels.append(line.reshape(1, -1))
-        au_img_path.append(os.path.join(os.path.join(img_path_vita,os.path.basename(os.path.normpath(test_txt.split('.')[0]))), str(j+1).zfill(5)+'.jpg'))    # what does it do here?
+        actual_img_path = os.path.join(os.path.join(img_path_vita,os.path.basename(os.path.normpath(test_txt.split('.')[0]))), str(j+1).zfill(5)+'.jpg')
+        au_img_path.append(actual_img_path)  #appende il path dell'immagine, "split" splitta il path dove ci sono i punti e poi prende solo cio che viene prima del punto (quindi toglie ".txt")
+        skeleton_output_dir = os.path.join(skeleton_path,Test_Set)
+        calculate_skeleton(actual_image_path, skeleton_output_dir)
 
 
 au_labels = np.concatenate(au_labels, axis=0)
@@ -182,10 +193,7 @@ np.savetxt(test_labels, AffWild2_test_image_label ,fmt='%d', delimiter=' ')
 new_dataset_test_label_list.append(AffWild2_test_image_label)
 
 
-#
-# print(len(new_dataset_train_img_list))
-# print(len(new_dataset_val_img_list))
-# print(len(new_dataset_test_img_list))
+
 
 new_dataset_train_label_list = np.concatenate(new_dataset_train_label_list, axis=0)
 new_dataset_val_label_list = np.concatenate(new_dataset_val_label_list, axis=0)
@@ -232,14 +240,3 @@ with open('/home/trentini/ME-GraphAU/OpenGraphAU/data/AffWild2/list/AffWild2_tes
     for line in new_dataset_test_img_list:
         f.write(line)
 
-# print(new_dataset_train_label_list.shape)
-# print(new_dataset_val_label_list.shape)
-# print(new_dataset_test_label_list.shape)
-
-# new_dataset_train_label_list[new_dataset_train_label_list==-1] = 0
-# new_dataset_val_label_list[new_dataset_val_label_list==-1] = 0
-# new_dataset_test_label_list[new_dataset_test_label_list==-1] = 0
-#
-# print(new_dataset_train_label_list.sum(0))
-# print(new_dataset_val_label_list.sum(0))
-# print(new_dataset_test_label_list.sum(0))

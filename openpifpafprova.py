@@ -7,7 +7,7 @@ import json
 from dataset import * 
 from utils import *
 
-import imageio
+
 
 print("entra qui")
 
@@ -21,7 +21,7 @@ def calculate_skeleton(image_path, output_dir):
     json_output = os.path.join(output_dir, os.path.splitext(os.path.basename(image_path))[0] + '.json')
 
     # Load image
-    img = openpifpaf.datasets.PilImage.open(image_path)
+    img = Image.open(image_path)
 
     # Create predictor object
     predictor = openpifpaf.Predictor(checkpoint=checkpoint)

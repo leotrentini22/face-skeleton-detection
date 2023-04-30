@@ -11,6 +11,24 @@ import subprocess
 
 def calculate_skeleton(image_path, output_dir):
     checkpoint = 'shufflenetv2k30-wholebody'
-    json_output = output_dir + image_path.split('/')[-1].split('.')[0] + '.json'
-    command = f'srun python -m openpifpaf.predict {image_path} --checkpoint={checkpoint} --json-output {json_output}'
-    subprocess.run(command.split())
+
+    # Create the output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Generate the JSON output file path
+    json_output = os.path.join(output_dir, os.path.splitext(os.path.basename(image_path))[0] + '.json')
+
+    # Load image
+    with open(image_path, 'rb') as f:
+        img = Image.open(f).convert('RGB')
+
+    # Create predictor object
+    predictor = openpifpaf.Predictor(checkpoint=checkpoint)
+
+    # Run prediction on image
+    pred = predictor.image(image_path)
+    
+    # json output
+    json_out_name = os.path.join(output_dir, os.path.splitext(os.path.basename(image_path))[0] + '.predictions.json')
+    with open(json_out_name, 'w') as f:
+        json.dump([ann.json_data() for ann in pred[0]], f)

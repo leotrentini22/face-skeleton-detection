@@ -28,12 +28,12 @@ def calculate_skeleton(image_path, output_dir):
     # Run prediction on image
     pred = predictor.image(image_path)
     print(type(pred))
-    
+
     # json output
     json_out_name = os.path.join(output_dir, os.path.splitext(os.path.basename(image_path))[0] + '.predictions.json')
     with open(json_out_name, 'w') as f:
         json.dump([ann.json_data() for ann in pred[0]], f)
 
-actual_image_path = '/work/vita/datasets/Aff-Wild2/cropped_aligned/430/00262.jpg'
+actual_image_path = '/work/vita/datasets/Aff-Wild2/cropped_aligned/430/00261.jpg'
 skeleton_output_dir = '/home/trentini/face-skeleton-detection'
 calculate_skeleton(actual_image_path, skeleton_output_dir)

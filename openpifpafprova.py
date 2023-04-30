@@ -27,11 +27,12 @@ def calculate_skeleton(image_path, output_dir):
     predictor = openpifpaf.Predictor(checkpoint=checkpoint)
 
     # Run prediction on image
-    predictions, _ = predictor(img)
-
-    # Convert predictions to JSON and save to file
-    with open(json_output, 'w') as f:
-        json.dump(predictions, f)
+    pred, _, meta = predictor.images(img)
+    # json output
+    json_out_name = out_name(
+        json_output, meta['file_name'], '.predictions.json')
+    with open(json_out_name, 'w') as f:
+        json.dump([ann.json_data() for ann in pred], f)
 
 actual_image_path = '/work/vita/datasets/Aff-Wild2/cropped_aligned/430/00262.jpg'
 skeleton_output_dir = '/home/trentini/face-skeleton-detection'

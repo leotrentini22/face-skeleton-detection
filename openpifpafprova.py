@@ -28,7 +28,7 @@ def calculate_skeleton(image_path, output_dir):
     predictor = openpifpaf.Predictor(checkpoint=checkpoint)
 
     # Run prediction on image
-    pred, _, meta = predictor.images([img])
+    pred, _, meta = predictor.images([image_path])
     # json output
     json_out_name = out_name(
         json_output, meta['file_name'], '.predictions.json')

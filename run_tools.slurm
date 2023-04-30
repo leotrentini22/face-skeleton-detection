@@ -8,7 +8,6 @@
 #SBATCH --partition=gpu
 
 cd tool/
-srun python AffWild2_image_label_process.py
-srun python AffWild2_calculate_AU_class_weights.py
-srun python AffWild2_deal_AU_relation.py
+srun python dataset_process.py
+srun python calculate_AU_class_weights.py
 deactivate

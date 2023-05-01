@@ -28,9 +28,15 @@ def calculate_skeleton(image_path, output_dir):
     # Run prediction on image
     pred = predictor.image(image_path)
     print(type(pred))
+    
+    #da togliere se non funziona
+    directory_name = os.path.basename(os.path.dirname(image_path))
+    file_name = os.path.splitext(os.path.basename(image_path))[0]
 
     # json output
     json_out_name = os.path.join(output_dir, os.path.splitext(os.path.basename(image_path))[0] + '.predictions.json')
+
+    new_file_name = f"{directory_name}.{file_name}.predictions.json"
     with open(json_out_name, 'w') as f:
         json.dump([ann.json_data() for ann in pred[0]], f)
 

@@ -14,9 +14,6 @@ def calculate_skeleton(image_path, output_dir):
     # Create the output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
 
-    # Generate the JSON output file path
-    json_output = os.path.join(output_dir, os.path.splitext(os.path.basename(image_path))[0] + '.json')
-
     # Load image
     print(type(image_path))
     with open(image_path, 'rb') as f:
@@ -29,13 +26,11 @@ def calculate_skeleton(image_path, output_dir):
     pred = predictor.image(image_path)
     print(type(pred))
     
-    #da togliere se non funziona
     directory_name = os.path.basename(os.path.dirname(image_path))
     file_name = os.path.splitext(os.path.basename(image_path))[0]
     new_file_name = f"{directory_name}.{file_name}.predictions.json"
 
     # json output
-    #json_out_name = os.path.join(output_dir, os.path.splitext(os.path.basename(image_path))[0] + '.predictions.json')
     json_out_name = os.path.join(output_dir, new_file_name)
 
     with open(json_out_name, 'w') as f:

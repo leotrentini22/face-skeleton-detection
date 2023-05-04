@@ -12,7 +12,7 @@ def calculate_skeleton(image_path, output_dir):
     os.makedirs(output_dir, exist_ok=True)
 
     # Load image
-    print(type(image_path))
+    print(image_path, flush=True)
     with open(image_path, 'rb') as f:
         img = Image.open(f).convert('RGB')
 
@@ -21,7 +21,6 @@ def calculate_skeleton(image_path, output_dir):
 
     # Run prediction on image
     pred = predictor.image(image_path)
-    print(type(pred))
     
     directory_name = os.path.basename(os.path.dirname(image_path))
     file_name = os.path.splitext(os.path.basename(image_path))[0]

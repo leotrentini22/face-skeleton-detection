@@ -96,8 +96,8 @@ for train_txt in train_list:  #scorre le cartelle in train list
         au_labels.append(line.reshape(1, -1)) #appende la linea rishapata
         actual_img_path = os.path.join(os.path.join(img_path_vita,os.path.basename(os.path.normpath(train_txt.split('.')[0]))), str(j+1).zfill(5)+'.jpg')
         au_img_path.append(actual_img_path)  #appende il path dell'immagine, "split" splitta il path dove ci sono i punti e poi prende solo cio che viene prima del punto (quindi toglie ".txt")
-        skeleton_output_dir = os.path.join(skeleton_path,train_path)
-        calculate_skeleton(actual_img_path, skeleton_output_dir)
+        #skeleton_output_dir = os.path.join(skeleton_path,train_path)
+        #calculate_skeleton(actual_img_path, skeleton_output_dir)
 
 
 au_labels = np.concatenate(au_labels, axis=0)
@@ -134,8 +134,8 @@ for val_txt in val_list:
         au_labels.append(line.reshape(1, -1))
         actual_img_path = os.path.join(os.path.join(img_path_vita,os.path.basename(os.path.normpath(val_txt.split('.')[0]))), str(j+1).zfill(5)+'.jpg')
         au_img_path.append(actual_img_path)  #appende il path dell'immagine, "split" splitta il path dove ci sono i punti e poi prende solo cio che viene prima del punto (quindi toglie ".txt")
-        skeleton_output_dir = os.path.join(skeleton_path,val_path)
-        calculate_skeleton(actual_img_path, skeleton_output_dir)
+        #skeleton_output_dir = os.path.join(skeleton_path,val_path)
+        #calculate_skeleton(actual_img_path, skeleton_output_dir)
 
 
 au_labels = np.concatenate(au_labels, axis=0)
@@ -173,8 +173,8 @@ for test_txt in test_list:   # test list = directories in /work/vita/datasets/Af
         au_labels.append(line.reshape(1, -1))
         actual_img_path = os.path.join(os.path.join(img_path_vita,os.path.basename(os.path.normpath(test_txt.split('.')[0]))), str(j+1).zfill(5)+'.jpg')
         au_img_path.append(actual_img_path)  #appende il path dell'immagine, "split" splitta il path dove ci sono i punti e poi prende solo cio che viene prima del punto (quindi toglie ".txt")
-        skeleton_output_dir = os.path.join(skeleton_path,test_path)
-        calculate_skeleton(actual_img_path, skeleton_output_dir)
+        #skeleton_output_dir = os.path.join(skeleton_path,test_path)
+        #calculate_skeleton(actual_img_path, skeleton_output_dir)
 
 
 au_labels = np.concatenate(au_labels, axis=0)

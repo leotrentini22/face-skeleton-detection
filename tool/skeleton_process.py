@@ -75,6 +75,6 @@ for test_txt in test_list:
         if -1 in line:
             continue
         actual_img_path = os.path.join(os.path.join(img_path_vita,os.path.basename(os.path.normpath(test_txt.split('.')[0]))), str(j+1).zfill(5)+'.jpg')
-        skeleton_output_dir = os.path.join(skeleton_path,test_path)
+        skeleton_output_dir = os.path.join(skeleton_path,'Test_Set')
         calculate_skeleton(actual_img_path, skeleton_output_dir)
 

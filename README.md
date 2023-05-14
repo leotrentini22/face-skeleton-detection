@@ -19,7 +19,7 @@
 
 ## General Information
 
-The repository contains the code and report for the Face Skeleton Detection, an implementation of [OpenPifPaf](https://openpifpaf.github.io/intro.html) on our dataset AffWild2
+The repository contains the code and report for the Face Skeleton Detection, an implementation of [OpenPifPaf](https://openpifpaf.github.io/intro.html) on our dataset AffWild2. This repository is part of a broader project that aims to adapt a general action recognition algorithm to a more specific face action units recognition task.
 
 ## Data
 

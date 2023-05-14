@@ -23,7 +23,7 @@ The repository contains the code and report for the Face Skeleton Detection, an 
 
 ## Data
 
-The data we use come from the [AffWild2](https://www.aicrowd.com/challenges/epfl-machine-learning-higgs/dataset_files) dataset. Before running, please be sure to download the data and change the paths inside the scripts.
+The data we use come from the [AffWild2](https://ibug.doc.ic.ac.uk/resources/aff-wild2/) dataset. Before running, please be sure to download the data and change the paths inside the scripts.
 
 To prepare the data, run this command:
    ```sh

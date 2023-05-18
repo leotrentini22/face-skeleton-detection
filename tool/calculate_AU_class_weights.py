@@ -1,7 +1,8 @@
 import numpy as np
 import os
+from open_pifpaf_utils import *
 
-list_path_prefix = '/home/trentini/face-skeleton-detection/data/AffWild2/list/'
+list_path_prefix, skeleton_path, img_path_vita, label_root, train_path, val_path, test_path = set_your_paths()
 
 '''
 example of content in 'AffWild2_train_label_fold1.txt':

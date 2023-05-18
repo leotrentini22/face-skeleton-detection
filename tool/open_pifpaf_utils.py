@@ -32,26 +32,34 @@ def calculate_skeleton(image_path, output_dir):
     with open(json_out_name, 'w') as f:
         json.dump([ann.json_data() for ann in pred[0]], f)
 
-# def calculate_skeleton(image_path, output_dir):
-#     checkpoint = 'shufflenetv2k30-wholebody'
 
-#     # Create the output directory if it doesn't exist
-#     os.makedirs(output_dir, exist_ok=True)
 
-#     # Generate the JSON output file path
-#     json_output = os.path.join(output_dir, os.path.splitext(os.path.basename(image_path))[0] + '.json')
 
-#     # Load image
-#     with open(image_path, 'rb') as f:
-#         img = Image.open(f).convert('RGB')
+#### FUNCTION TO SET YOUR PATHS
 
-#     # Create predictor object
-#     predictor = openpifpaf.Predictor(checkpoint=checkpoint)
+def set_your_paths():
+    # CHANGE HERE PATHS 
 
-#     # Run prediction on image
-#     pred = predictor.image(image_path)
+    # list_path_prefix -> path of the folder where the list of paths of the images and the list of AUs will be stored
+    # skeleton_path -> path of the folder where the skeletons json files will be stored 
+
+    list_path_prefix = '/home/trentini/face-skeleton-detection/data/AffWild2/list/' 
+    skeleton_path = '/home/trentini/face-skeleton-detection/data/AffWild2/skeletons/'
+
+
+    # CHANGE HERE THE PATH OF THE DATASET
+    # this will depend on where you store the dataser
+    # img_path_vita -> folder in which are stored the images
+    # label_root -> folder in which are stored the labels (i.e. the AUs)
+
+    img_path_vita = '/work/vita/datasets/Aff-Wild2/cropped_aligned/'
+    label_root = '/work/vita/datasets/Aff-Wild2/Third_ABAW_Annotations/AU_Detection_Challenge/'
+
+
+    # names of the folders in label_root where there train_set, val_set and test_set are divided
     
-#     # json output
-#     json_out_name = os.path.join(output_dir, os.path.splitext(os.path.basename(image_path))[0] + '.predictions.json')
-#     with open(json_out_name, 'w') as f:
-#         json.dump([ann.json_data() for ann in pred[0]], f)
+    train_path ='Train_Set' 
+    val_path = 'Validation_Set' 
+    test_path = 'Validation_Set'   #there is no test set in our dataset
+
+    return list_path_prefix, skeleton_path, img_path_vita, label_root, train_path, val_path, test_path

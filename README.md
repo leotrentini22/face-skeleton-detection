@@ -11,6 +11,8 @@
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#General-Information">General Information</a></li>
+    <li><a href="#Requirements">Requirements</a></li>
+    <li><a href="#Install-OpenPifPaf">Install OpenPifPaf</a></li>
     <li><a href="#Data">Data</a></li>
     <li><a href="#Structure">Structure</a></li>
     <li><a href="#Usage">Usage</a></li>
@@ -19,13 +21,29 @@
 
 ## General Information
 
-The repository contains the code and report for the Face Skeleton Detection, an implementation of [OpenPifPaf](https://openpifpaf.github.io/intro.html) on our dataset AffWild2. This repository is part of a broader project that aims to adapt a general action recognition algorithm to a more specific face action units recognition task.
+The repository contains the code and report for the Face Skeleton Detection, an implementation of [OpenPifPaf](https://openpifpaf.github.io/intro.html) on our dataset AffWild2. The aim is to extract keypoints (skeletons) from facial images. This repository is part of a broader project that aims to adapt a general action recognition algorithm to a more specific face action units recognition task.
+
+## Requirements
+- Python 3
+- PyTorch
+
+## Install OpenPifPaf
+
+Make sure there is no folder named openpifpaf in your current directory. To install OpenPifPaf, run this command:
+   ```sh
+   pip3 install openpifpaf
+   ```
 
 ## Data
 
-The data we use come from the [AffWild2](https://ibug.doc.ic.ac.uk/resources/aff-wild2/) dataset. Before running, please be sure to download the data and change the paths inside the scripts.
+The Dataset we used:
+  * [AffWild2](https://ibug.doc.ic.ac.uk/resources/aff-wild2/)
 
-To prepare the data, run this command:
+We provide tools for prepareing data in ```tool/```.
+
+1. Download raw data files
+2. Modify the file ```tool/openpifpaf_utils.py```, by setting your own personal paths (e.g. the path where you store the dataset, or the path where you would like to store the lists of AUs. More details are provided in this specific file)
+3. From this folder, run:
    ```sh
    cd tool/
    python dataset_process.py
